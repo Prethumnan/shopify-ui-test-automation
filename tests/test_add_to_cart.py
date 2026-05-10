@@ -9,7 +9,6 @@ import pytest
 from pages.add_to_cart_page import AddToCartPage
 from pages.product_search_page import ProductSearchPage
 from utils.data_loader import DataLoader
-import time
 
 
 class TestAddToCart:
@@ -110,7 +109,10 @@ class TestAddToCart:
     # =====================================================
 
     def test_increase_quantity_reflects_in_item_total_and_subtotal(self):
-        """Verify that after clicking plus, item total and subtotal are equal."""
+        """
+        AC-TC-01 | Positive
+        Verify that after clicking plus, item total and subtotal are equal.
+        """
         self._search_and_add_to_cart(self.minimum_quantity_product)
         unit_price = self.cart_page.get_cart_item_unit_price()
         self.cart_page.click_plus_button(self.minimum_quantity_product)
@@ -118,7 +120,10 @@ class TestAddToCart:
         self._validate_item_total_and_subtotal(unit_price, quantity)
 
     def test_increase_quantity_reflects_correct_calculation(self):
-        """Verify item total equals unit price multiplied by quantity after clicking plus."""
+        """
+        AC-TC-02 | Positive
+        Verify item total equals unit price multiplied by quantity after clicking plus.
+        """
         self._search_and_add_to_cart(self.minimum_quantity_product)
         unit_price = self.cart_page.get_cart_item_unit_price()
         self.cart_page.click_plus_button(self.minimum_quantity_product)
@@ -126,7 +131,10 @@ class TestAddToCart:
         self._validate_item_total_and_subtotal(unit_price, quantity)
 
     def test_decrease_quantity_reflects_in_item_total_and_subtotal(self):
-        """Verify that after increasing to 3 and clicking minus, item total and subtotal reflect correctly."""
+        """
+        AC-TC-03 | Positive
+        Verify that after increasing to 3 and clicking minus, item total and subtotal reflect correctly.
+        """
         self._search_and_add_to_cart(self.minimum_quantity_product)
         unit_price = self.cart_page.get_cart_item_unit_price()
         self.cart_page.click_plus_button(self.minimum_quantity_product)
@@ -141,7 +149,10 @@ class TestAddToCart:
     # =====================================================
 
     def test_add_out_of_stock_product_to_cart(self):
-        """Verify add to cart button is disabled for out of stock product."""
+        """
+        AC-TC-04 | Negative
+        Verify add to cart button is disabled for out of stock product.
+        """
         self.search_page.click_search()
         self.search_page.search_for_product(self.out_of_stock_product)
         is_out_of_stock = self.cart_page.is_product_sold_out(self.out_of_stock_product)
@@ -153,7 +164,10 @@ class TestAddToCart:
             )
 
     def test_buy_now_disabled_for_out_of_stock_product(self):
-        """Verify clicking Buy Now on a sold out product does not navigate away."""
+        """
+        AC-TC-05 | Negative
+        Verify clicking Buy Now on a sold out product does not navigate away.
+        """
         self.search_page.click_search()
         self.search_page.search_for_product(self.out_of_stock_product)
         is_out_of_stock = self.cart_page.is_product_sold_out(self.out_of_stock_product)
@@ -162,7 +176,10 @@ class TestAddToCart:
             self.cart_page.verify_buy_now_does_not_navigate(self.out_of_stock_product)
 
     def test_minus_button_disabled_at_minimum_quantity(self):
-        """Verify minus button is disabled when product quantity is 1 in cart."""
+        """
+        AC-TC-06 | Negative
+        Verify minus button is disabled when product quantity is 1 in cart.
+        """
         self._search_and_add_to_cart(self.minimum_quantity_product)
         assert self.cart_page.is_minus_button_disabled(self.minimum_quantity_product), (
             f"Expected minus button to be disabled at quantity 1 "
@@ -175,7 +192,10 @@ class TestAddToCart:
     # =====================================================
 
     def test_cart_badge_updates_after_adding_product(self):
-        """Verify cart badge count increments correctly after adding product."""
+        """
+        AC-TC-07 | Edge Case
+        Verify cart badge count increments correctly after adding product.
+        """
         self._search_and_add_to_cart(self.minimum_quantity_product)
         self.cart_page.wait_for_badge_count(1)
         assert self.cart_page.get_cart_badge_count() == 1, (
@@ -190,7 +210,10 @@ class TestAddToCart:
         )
 
     def test_cart_persists_after_page_refresh(self):
-        """Verify cart contents persist after page refresh."""
+        """
+        AC-TC-08 | Edge Case
+        Verify cart contents persist after page refresh.
+        """
         self._search_and_add_to_cart(self.minimum_quantity_product)
         count_before_refresh = self.cart_page.get_cart_badge_count()
         self.cart_page.refresh_page()

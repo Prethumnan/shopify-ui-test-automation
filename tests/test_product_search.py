@@ -42,13 +42,13 @@ class TestProductSearch:
     data = DataLoader.load_test_data(SEARCH_DATA_FILE)
 
     # Positive test data
-    exact_product                           = data[KEY_POSITIVE][KEY_EXACT_PRODUCT]
-    partial_product                         = data[KEY_POSITIVE][KEY_PARTIAL_PRODUCT]
-    case_sensitive_product                  = data[KEY_POSITIVE][KEY_CASE_SENSITIVE_PRODUCT]
+    exact_product                            = data[KEY_POSITIVE][KEY_EXACT_PRODUCT]
+    partial_product                          = data[KEY_POSITIVE][KEY_PARTIAL_PRODUCT]
+    case_sensitive_product                   = data[KEY_POSITIVE][KEY_CASE_SENSITIVE_PRODUCT]
 
     # Negative test data
-    invalid_product                         = data[KEY_NEGATIVE][KEY_NON_EXISTING_PRODUCT]
-    numeric_input                           = data[KEY_NEGATIVE][KEY_NUMERIC_INPUT]
+    invalid_product                          = data[KEY_NEGATIVE][KEY_NON_EXISTING_PRODUCT]
+    numeric_input                            = data[KEY_NEGATIVE][KEY_NUMERIC_INPUT]
     combination_of_letter_special_chr_number = data[KEY_NEGATIVE][KEY_COMBINATION_INPUT]
 
     # Edge case test data
@@ -102,17 +102,26 @@ class TestProductSearch:
     # =====================================================
 
     def test_search_exact_product_name(self):
-        """Verify user can search using exact product name and result message reflects it."""
+        """
+        PS-TC-01 | Positive
+        Verify user can search using exact product name and result message reflects it.
+        """
         self._search_and_validate_result(self.exact_product)
         self.search_page.validate_presence_of_product_in_product_link(self.exact_product)
 
     def test_search_partial_product_name(self):
-        """Verify search works with partial product keyword."""
+        """
+        PS-TC-02 | Positive
+        Verify search works with partial product keyword.
+        """
         self._search_and_validate_result(self.partial_product)
         self.search_page.validate_presence_of_product_in_product_link(self.partial_product)
 
     def test_search_case_sensitive_product_name(self):
-        """Verify search works irrespective of text case."""
+        """
+        PS-TC-03 | Positive
+        Verify search works irrespective of text case.
+        """
         self._search_and_validate_result(self.case_sensitive_product)
         self.search_page.validate_presence_of_product_in_product_link(self.exact_product)
 
@@ -122,15 +131,24 @@ class TestProductSearch:
     # =====================================================
 
     def test_search_non_existing_product(self):
-        """Verify application handles non-existing product search."""
+        """
+        PS-TC-04 | Negative
+        Verify application handles non-existing product search.
+        """
         self._search_and_validate_no_result(self.invalid_product)
 
     def test_search_using_only_numbers(self):
-        """Verify application handles numeric search input."""
+        """
+        PS-TC-05 | Negative
+        Verify application handles numeric search input.
+        """
         self._search_and_validate_no_result(self.numeric_input)
 
     def test_search_with_combination_of_letters_strings_special_character(self):
-        """Verify application handles combination of letters, numbers and special characters."""
+        """
+        PS-TC-06 | Negative
+        Verify application handles combination of letters, numbers and special characters.
+        """
         self._search_and_validate_no_result(self.combination_of_letter_special_chr_number)
 
     # =====================================================
@@ -139,9 +157,15 @@ class TestProductSearch:
     # =====================================================
 
     def test_search_with_xss_input(self):
-        """Verify application handles XSS script input safely without opening any popup."""
+        """
+        PS-TC-07 | Edge Case
+        Verify application handles XSS script input safely without opening any popup.
+        """
         self._search_and_validate_no_result(self.xss_script_input)
 
     def test_search_with_long_characters(self):
-        """Verify application handles very long search input."""
+        """
+        PS-TC-08 | Edge Case
+        Verify application handles very long search input.
+        """
         self._search_and_validate_no_result(self.long_character_input)
