@@ -81,6 +81,8 @@ AdNabuTestStore/
 
 ## Test Coverage
 
+📄 **Detailed Test Case Document:** [docs/AdNabu_Test_Cases.xlsx](docs/AdNabu_Test_Cases.xlsx)
+
 ### Product Search — `test_product_search.py`
 
 | # | Test Case | Type |
