@@ -1,0 +1,36 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# pytest Cache
+.pytest_cache/
+.cache/
+
+# Test Reports (auto-generated on every run)
+reports/
+
+# WebDriver Manager Cache (downloaded drivers)
+.wdm/
+
+# IDE — PyCharm
+.idea/
+
+# IDE — VS Code
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Allure Results (if used)
+allure-results/
+allure-report/
+
+# Logs
+*.log

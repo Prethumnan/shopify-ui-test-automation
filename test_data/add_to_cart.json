@@ -1,0 +1,10 @@
+{
+  "positive_cart_data": {
+    "single_product_name": "Panini Illusions Football"
+  },
+
+  "negative_cart_data": {
+    "out_of_stock_product": "Panini Illusions Football",
+    "minimum_quantity_product": "The Collection Snowboard: Liquid"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "positive_search_data": {
+
+    "exact_product_name": "Panini Illusions Football",
+    "partial_product_name": "Sno",
+    "case_sensitive_product_name": "pAniNi ILLUsioNs FooTBALL"
+  },
+
+  "negative_search_data": {
+
+    "non_existing_product": "xyz123abcdef",
+    "numeric_search_input": "999999999999999999999",
+    "combination_input": "sdsoido@$61212"
+  },
+
+  "edge_case_search_data": {
+
+    "xss_script_input": "<script>alert('test')</script>",
+
+    "long_character_search": "thisisaveryveryveryveryveryveryverylongsearchinputtotestapplicationbehaviorandstability"
+  }
+}
